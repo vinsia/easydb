@@ -1,0 +1,6 @@
+common --color=yes
+common --enable_bzlmod
+common --cxxopt='-std=c++17'
+common --cxxopt='-gstabs+'
+
+test --test_output=all
