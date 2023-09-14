@@ -1,7 +1,6 @@
 #pragma once
 
 #include <iostream>
-#include <malloc.h>
 
 #include "assert.h"
 #include "easydb/utils/arena.h"
