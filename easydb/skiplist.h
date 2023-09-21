@@ -30,7 +30,8 @@ class SkipList {
    public:
     explicit Node(const Key& key, const Value& value)
         : key_(key), value_(value) {}
-    ~Node() { free(next_); }
+    ~Node() = default;
+    // ~Node() { free(next_); }
 
     // There is different memory synchronization from LevelDB.
     Node* Next(int level) { return next_[level]; }
@@ -46,19 +47,19 @@ class SkipList {
   };
 
   Node* NewNode(const Key& key, const Value& value, int height) {
-    std::cerr << sizeof(Node) << " " << sizeof(Node*) << std::endl;
+    // std::cerr << sizeof(Node) << " " << sizeof(Node*) << std::endl;
     int kNodeAllocationSize = sizeof(Node) + sizeof(Node*) * (height - 1);
-    std::cerr << "1" << std::endl;
-    std::cerr << kNodeAllocationSize << std::endl;
+    // std::cerr << "1" << std::endl;
+    // std::cerr << kNodeAllocationSize << std::endl;
     char* const node_memory = arena_->AllocateAligned(kNodeAllocationSize);
-    std::cerr << "2" << std::endl;
+    // std::cerr << "2" << std::endl;
     // std::cerr << node_memory << std::endl;
-    std::cerr << static_cast<void*>(node_memory) << std::endl;
-    // Node* node = new (node_memory) Node(key, value);
-    Node* node = new Node(0, 0);
-    std::cerr << "3" << std::endl;
-    std::cerr << static_cast<void*>(node) << std::endl;
-    std::cerr << &kNodeAllocationSize << std::endl;
+    // std::cerr << static_cast<void*>(node_memory) << std::endl;
+    Node* node = new (node_memory) Node(key, value);
+    // Node* node = new Node(0, 0);
+    // std::cerr << "3" << std::endl;
+    // std::cerr << static_cast<void*>(node) << std::endl;
+    // std::cerr << &kNodeAllocationSize << std::endl;
     return node;
   }
 
