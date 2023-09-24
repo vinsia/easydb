@@ -35,4 +35,9 @@ cc_test(
 cc_binary(
     name = "test",
     srcs = ["test.cc"],
+    deps = [
+        ":skiplist",
+        "//easydb/utils:random",
+        "@googletest//:gtest_main",
+    ],
 )

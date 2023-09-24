@@ -2,6 +2,11 @@ common --color=yes
 common --enable_bzlmod
 common --cxxopt='-std=c++17'
 # common --cxxopt='-gstabs+'
+# debug information
+common --cxxopt='-g'
+common --strip=never
+common -c dbg
+
 
 # Use our custom-configured c++ toolchain.
 # build:clang_config --crosstool_top=//toolchain:clang_suite

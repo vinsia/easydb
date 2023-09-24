@@ -6,27 +6,19 @@
  *
  * Copyright (c) 2023 vinsia.cn
  */
+#include <glog/logging.h>
+#include <iostream>
 
-template <int N>
-class Node {
- public:
-  explicit Node(const Key& key, const Value& value)
-      : key_(key), value_(value) {}
-  ~Node() = default;
-
-  Next(int level) { return next_[level]; }
-  SetNext(int level, Node* node) { next_[level] = node; }
-
-  const Key key_;
-  const Value value_;
-
- private:
-  Node* next_;
-};
+#include "easydb/skiplist.h"
+#include "easydb/utils/arena.h"
 
 int main() {
-  auto node1 = Node<3>("1", "2");
-  auto node2 = Node<4>("1", "2");
-  Node* node[] = {&node1, &node2};
+  easydb::Arena arena;
+  easydb::SkipList<int, int> skip_list = easydb::SkipList<int, int>(&arena);
+  std::cout << skip_list.GetMaxHeight() << std::endl;
+  skip_list.Insert(1, 2);
+
+  std::cout << skip_list.Contains(1) << std::endl;
+  std::cout << skip_list.Contains(2) << std::endl;
   return 0;
 }
