@@ -15,9 +15,9 @@ class SkipList {
   SkipList(Arena* arena)
       // TODO: Fix the the Key or Value can not assign to the nullptr
       : arena_(arena),
-        head_(NewNode(0, 0, kMaxHeight)),
-        rnd_(0xdeadbeef),
-        max_height_(1) {
+        head_(NewNode(Key(), Value(), kMaxHeight)),
+        max_height_(1),
+        rnd_(0xdeadbeef) {
     for (int i = 0; i < kMaxHeight; i++) {
       head_->SetNext(i, nullptr);
     }

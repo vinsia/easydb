@@ -26,6 +26,16 @@ TEST(SkipListTest, Node) {
   }
 }
 
+TEST(SkipListTest, StringNode) {
+  {
+    Arena arena;
+    auto skip_list = SkipList<std::string, std::string>(&arena);
+    skip_list.Insert("key", "value");
+    EXPECT_EQ(true, skip_list.Contains("key"));
+    EXPECT_EQ(false, skip_list.Contains("value"));
+  }
+}
+
 TEST(SkipListTest, Init) {
   Arena arena;
   SkipList<int, int> skip_list = SkipList<int, int>(&arena);

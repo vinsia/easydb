@@ -2,6 +2,10 @@ cc_library(
     name = "easydb",
     srcs = ["easydb.cc"],
     hdrs = ["easydb.h"],
+    deps = [
+        ":skiplist",
+        "//easydb/utils:arena",
+    ],
 )
 
 cc_binary(
@@ -33,8 +37,8 @@ cc_test(
 )
 
 cc_binary(
-    name = "test",
-    srcs = ["test.cc"],
+    name = "construct_order_test",
+    srcs = ["construct_order_test.cc"],
     deps = [
         ":skiplist",
         "//easydb/utils:random",

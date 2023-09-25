@@ -2,9 +2,6 @@
 #include <iostream>
 
 #include "easydb/easydb.h"
-#include "easydb/skiplist.h"
-#include "easydb/utils/arena.h"
-#include "gtest/gtest.h"
 
 void InitGoogleLogging(char* argv[]) {
   google::InitGoogleLogging(argv[0]);
@@ -16,7 +13,13 @@ int main(int argc, char* argv[]) {
   // Initialize Google’s logging library.
   InitGoogleLogging(argv);
 
-  Arena arena;
-  SkipList<int, int> skip_list = SkipList<int, int>(&arena);
-  std::cerr << "4" << std::endl;
+  easydb::EasyDB easydb("/tmp/easydb");
+  easydb.Put("hello", "world");
+  easydb.Put("bonnie", "female");
+  easydb.Put("vinsia", "male");
+
+  LOG(INFO) << "get bonnie " << easydb.Get("bonnie");
+  LOG(INFO) << "get vinsia " << easydb.Get("vinsia");
+  // LOG(DEBUG) << "Found " << num_cookies << " cookies";
+  return 0;
 }
