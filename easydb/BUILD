@@ -26,6 +26,35 @@ cc_library(
     ],
 )
 
+cc_library(
+    name = "slice",
+    hdrs = ["slice.h"],
+)
+
+cc_library(
+    name = "struct",
+    hdrs = ["struct.h"],
+)
+
+cc_library(
+    name = "status",
+    hdrs = ["status.h"],
+    deps = [
+        ":slice",
+    ],
+)
+
+cc_library(
+    name = "memtable",
+    srcs = ["memtable.cc"],
+    hdrs = ["memtable.h"],
+    deps = [
+        ":slice",
+        ":status",
+        ":struct",
+    ],
+)
+
 cc_test(
     name = "skiplist_test",
     srcs = ["skiplist_test.cc"],

@@ -9,6 +9,7 @@ namespace {
 using Random = easydb::utils::Random;
 using Arena = easydb::utils::Arena;
 }  // namespace
+
 template <typename Key, typename Value>
 class SkipList {
  public:
